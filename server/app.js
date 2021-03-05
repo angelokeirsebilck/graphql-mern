@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+var cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
 const mongoose = require('mongoose');
 
@@ -18,7 +19,7 @@ mongoose.connect(process.env.MONGO_ATLAS_CONNECTION_STRING, {
 mongoose.connection.once('open', () => {
     console.log('Connected to database.');
 });
-
+app.use(cors());
 app.use(
     '/graphql',
     graphqlHTTP({
